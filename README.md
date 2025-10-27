@@ -1,1 +1,1 @@
-# Eco-scan
+# Garbage-analyzer EcoScan
