@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoAnalyzer - Smart Waste Classification</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-recycle"></i> EcoAnalyzer</h1>
+            <p>AI-Powered Waste Classification & Medical Waste Detection</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Upload Waste Image</h3>
+                    <p>Supported formats: JPG, PNG, GIF (Max 16MB)</p>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <button class="btn-primary" onclick="document.getElementById('fileInput').click()">
+                        Choose Image
+                    </button>
+                </div>
+                
+                <div class="camera-section">
+                    <button class="btn-secondary" id="cameraBtn">
+                        <i class="fas fa-camera"></i> Use Camera
+                    </button>
+                    <div class="camera-preview hidden" id="cameraPreview">
+                        <video id="video" autoplay playsinline></video>
+                        <button class="btn-capture" id="captureBtn">
+                            <i class="fas fa-camera"></i> Capture
+                        </button>
+                    </div>
+                    <canvas id="canvas" hidden></canvas>
+                </div>
+            </div>
+
+            <div class="result-section hidden" id="resultSection">
+                <h3>Analysis Result</h3>
+                <div class="result-card">
+                    <div class="result-header">
+                        <span class="waste-type" id="wasteType">Organic Waste</span>
+                        <span class="confidence" id="confidence">85%</span>
+                    </div>
+                    <div class="category-badge" id="categoryBadge">Biodegradable</div>
+                    <div class="disposal-guide">
+                        <h4><i class="fas fa-info-circle"></i> Disposal Guide</h4>
+                        <p id="disposalGuide">Compost in organic bin. Do not mix with other waste types.</p>
+                    </div>
+                    <div class="safety-info hidden" id="safetyInfo">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Safety Warning</h4>
+                        <p>Medical waste requires special handling. Use proper protective equipment.</p>
+                    </div>
+                </div>
+
+                <div class="detailed-analysis">
+                    <h4>Detailed Predictions</h4>
+                    <div class="prediction-bars" id="predictionBars">
+                        <!-- Prediction bars will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-section">
+                <h3>Recent Analyses</h3>
+                <div class="history-list" id="historyList">
+                    <!-- History items will be loaded here -->
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built for Hackathon 2024 | Promoting Sustainable Waste Management</p>
+        </footer>
+    </div>
+
+    <div class="loading hidden" id="loading">
+        <div class="spinner"></div>
+        <p>Analyzing waste...</p>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
