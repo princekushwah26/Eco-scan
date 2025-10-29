@@ -63,6 +63,8 @@ class WasteClassifier:
 
         except Exception as e:
             print(f"❌ Error loading model: {e}")
+            # More specific warning if file not found
+            print(f"⚠️ Warning: Model file not found at {model_path}. Running with mock prediction.")
             self.model = None
 
     def preprocess_image(self, image_array, target_size=(224, 224)):
@@ -131,3 +133,25 @@ class WasteClassifier:
                 for cls, conf in zip(self.classes, mock_prediction)
             }
         }
+
+if __name__ == "__main__":
+    print("--- Starting WasteClassifier script execution ---")
+    print(f"TensorFlow version: {tf.__version__}")
+    print(f"NumPy version: {np.__version__}")
+    print(f"Current working directory: {os.getcwd()}")
+    
+    # Determine the absolute path to the model file
+    # The default path in load_model is "model/waste_classifier_model.h5"
+    # This path is relative to the current working directory when the script is run.
+    # If you run this script from the 'backend' directory, it expects the model in 'backend/model/waste_classifier_model.h5'.
+    # If you run it from the project root, it expects 'Eco-Scan/model/waste_classifier_model.h5'.
+    # Adjust the path below if your model file is located elsewhere.
+    # For example, if waste_classifier_model.h5 is in the same directory as waste_classifier.py:
+    # model_path_for_test = os.path.join(os.path.dirname(os.path.abspath(__file__)), "waste_classifier_model.h5")
+    
+    print("Attempting to initialize WasteClassifier...")
+    classifier = WasteClassifier()
+    print("WasteClassifier initialized. Attempting to load model...")
+    classifier.load_model() # Uses the default path "model/waste_classifier_model.h5"
+    print("Model loading attempt completed (may have used mock if file not found).")
+    print("--- WasteClassifier script execution finished ---")
